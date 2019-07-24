@@ -1,6 +1,10 @@
 package com.goodforgoodbusiness.rocks;
 
+import static com.goodforgoodbusiness.rocks.RocksUtils.startsWith;
+
 import java.util.Iterator;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.rocksdb.RocksIterator;
 
@@ -10,24 +14,7 @@ import com.goodforgoodbusiness.rocks.PrefixIterator.Row;
  * Iterates over values matching a particular RocksDB prefix.
  * @author ijmad
  */
-public class PrefixIterator implements Iterator<Row>, AutoCloseable {
-	/**
-	 * Check if one array starts with the contents of another
-	 */
-	private static boolean startsWith(byte [] bytes, byte [] prefix) {
-		if (bytes.length >= prefix.length) {
-			for (var x = 0; x < prefix.length; x++) {
-				if (bytes[x] != prefix[x]) {
-					return false;
-				}
-			}
-			
-			return true;
-		}
-		
-		return false;
-	}
-	
+public class PrefixIterator implements Iterator<Row> {	
 	public static class Row {
 		public final byte [] key, val;
 		
@@ -83,9 +70,20 @@ public class PrefixIterator implements Iterator<Row>, AutoCloseable {
 		
 		return lastVal;
 	}
-
-	@Override
+	
 	public void close() {
 		it.close();
+	}
+	
+	/**
+	 * Return a stream over the elements of this iterator
+	 */
+	public Stream<Row> stream() {
+		Iterable<Row> iterable = () -> this;
+		
+		var stream = StreamSupport.stream(iterable.spliterator(), false);
+		stream.onClose(() -> close());
+		
+		return stream;
 	}
 }
