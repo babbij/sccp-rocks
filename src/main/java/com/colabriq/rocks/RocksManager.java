@@ -1,4 +1,4 @@
-package com.goodforgoodbusiness.rocks;
+package com.colabriq.rocks;
 
 import static java.lang.Integer.parseInt;
 

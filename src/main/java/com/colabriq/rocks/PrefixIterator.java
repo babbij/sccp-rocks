@@ -1,6 +1,6 @@
-package com.goodforgoodbusiness.rocks;
+package com.colabriq.rocks;
 
-import static com.goodforgoodbusiness.rocks.RocksUtils.startsWith;
+import static com.colabriq.rocks.RocksUtils.startsWith;
 
 import java.util.Iterator;
 import java.util.stream.Stream;
@@ -8,7 +8,7 @@ import java.util.stream.StreamSupport;
 
 import org.rocksdb.RocksIterator;
 
-import com.goodforgoodbusiness.rocks.PrefixIterator.Row;
+import com.colabriq.rocks.PrefixIterator.Row;
 
 /**
  * Iterates over values matching a particular RocksDB prefix.

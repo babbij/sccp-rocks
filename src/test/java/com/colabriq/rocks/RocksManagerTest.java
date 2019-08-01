@@ -1,4 +1,4 @@
-package com.goodforgoodbusiness.rocks;
+package com.colabriq.rocks;
 
 public class RocksManagerTest {
 	public static void main(String[] args) throws Exception {
