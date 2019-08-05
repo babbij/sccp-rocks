@@ -13,7 +13,7 @@
 
 	<artifactId>rocks</artifactId>
 	<packaging>jar</packaging>
-	<name>SCCP RocksDB Shared Library</name>
+	<name>SCCP RocksDB Library</name>
 
 	<dependencies>
 		<dependency>
